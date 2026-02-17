@@ -1,18 +1,39 @@
 import streamlit as st
-import sympy as sp
-from sympy import (
-    symbols, diff, integrate, latex, sympify, simplify,
-    sin, cos, tan, exp, log, sqrt, Derivative, Integral,
-    expand, Symbol, oo, pi, E,
-    asin, acos, atan, sinh, cosh, tanh, sec, csc, cot,
-    Mul, Add, Pow, Rational, Integer, preorder_traversal
-)
-import plotly.graph_objects as go
-import numpy as np
 
 st.set_page_config(page_title="Advanced Calculus Solver - MathWithAmrit",
                    page_icon="📐", layout="wide",
                    initial_sidebar_state="collapsed")
+
+# ── Cache heavy imports so they only load ONCE per server session ──────────
+@st.cache_resource(show_spinner=False)
+def _load_libs():
+    import sympy as sp
+    import plotly.graph_objects as go
+    import numpy as np
+    return sp, go, np
+
+@st.cache_resource(show_spinner=False)
+def _load_sympy_names():
+    from sympy import (
+        symbols, diff, integrate, latex, sympify, simplify,
+        sin, cos, tan, exp, log, sqrt, Derivative, Integral,
+        expand, Symbol, oo, pi, E,
+        asin, acos, atan, sinh, cosh, tanh, sec, csc, cot,
+        Mul, Add, Pow, Rational, Integer, preorder_traversal
+    )
+    return (symbols, diff, integrate, latex, sympify, simplify,
+            sin, cos, tan, exp, log, sqrt, Derivative, Integral,
+            expand, Symbol, oo, pi, E,
+            asin, acos, atan, sinh, cosh, tanh, sec, csc, cot,
+            Mul, Add, Pow, Rational, Integer, preorder_traversal)
+
+# Load everything once — instant on all subsequent reruns
+sp, go, np = _load_libs()
+(symbols, diff, integrate, latex, sympify, simplify,
+ sin, cos, tan, exp, log, sqrt, Derivative, Integral,
+ expand, Symbol, oo, pi, E,
+ asin, acos, atan, sinh, cosh, tanh, sec, csc, cot,
+ Mul, Add, Pow, Rational, Integer, preorder_traversal) = _load_sympy_names()
 
 hide_branding = """
     <style>
@@ -230,7 +251,9 @@ def _int_svg(n: int, color: str, height: int = 72) -> str:
 # ╚══════════════════════════════════════════════════════════════════════════╝
 # KEY FIX: All multi-integral LaTeX uses \iint / \iiint (single atoms that
 # MathJax renders correctly) — NOT \int\int which breaks into floating signs.
-FORMULA_DB = {
+@st.cache_resource(show_spinner=False)
+def _build_formula_db():
+    return {
     # Derivatives
     "limit_def":    {"name":"Limit Definition",        "latex":r"\frac{d}{dx}f(x)=\lim_{h\to0}\frac{f(x+h)-f(x)}{h}",           "explanation":"The foundational limit definition of the derivative.",                                      "tags":["derivative"]},
     "power_rule":   {"name":"Power Rule",              "latex":r"\frac{d}{dx}x^n = n\,x^{n-1}",                                   "explanation":"Multiply by the exponent, then subtract 1 from it.",                                        "tags":["derivative","power"]},
@@ -289,7 +312,9 @@ FORMULA_DB = {
                      "latex":r"\iiint_{V} f\,dV = \int_0^{2\pi}\!\int_0^{\pi}\!\int_0^{R} f\,\rho^2\sin\phi\,d\rho\,d\phi\,d\theta",
                      "explanation":"Use when the region is a sphere or f contains x²+y²+z².",
                      "tags":["triple","spherical"]},
-}
+    }
+
+FORMULA_DB = _build_formula_db()
 
 
 # ╔══════════════════════════════════════════════════════════════════════════╗
@@ -1544,6 +1569,17 @@ def _end():         st.markdown('</div>', unsafe_allow_html=True)
 # ╔══════════════════════════════════════════════════════════════════════════╗
 # ║  MAIN APP                                                                ║
 # ╚══════════════════════════════════════════════════════════════════════════╝
+
+# Warm up SymPy on first load so solver is instant when user clicks
+@st.cache_resource(show_spinner=False)
+def _warmup():
+    import sympy as _sp
+    x = _sp.Symbol('x')
+    _sp.diff(_sp.sin(x)*_sp.exp(x), x)
+    _sp.integrate(_sp.sin(x), x)
+    return True
+_warmup()
+
 if st.session_state.operation is None:
 
     # Title
@@ -1634,9 +1670,7 @@ if st.session_state.operation is None:
     @media(max-width:768px){.guide-grid{grid-template-columns:1fr 1fr;}}
     @media(max-width:480px){.guide-grid{grid-template-columns:1fr;}}
     </style>
-
     <div class="guide-grid">
-
       <div class="guide-card guide-card-basic">
         <h4>⚡ Basic Operations</h4>
         <table class="guide-table">
@@ -1649,7 +1683,6 @@ if st.session_state.operation is None:
           <tr><td>1 over x²+1</td><td><span class="guide-arrow">→</span> <span class="guide-code">1/(x**2+1)</span></td></tr>
         </table>
       </div>
-
       <div class="guide-card guide-card-trig">
         <h4>📐 Trig &amp; Inverse Trig</h4>
         <table class="guide-table">
@@ -1662,20 +1695,18 @@ if st.session_state.operation is None:
           <tr><td>sin²x</td><td><span class="guide-arrow">→</span> <span class="guide-code">sin(x)**2</span></td></tr>
         </table>
       </div>
-
       <div class="guide-card guide-card-exp">
-        <h4>🔢 Exponential &amp; Log</h4>
+        <h4>🔢 Exp, Log &amp; Hyperbolic</h4>
         <table class="guide-table">
           <tr><td>eˣ</td><td><span class="guide-arrow">→</span> <span class="guide-code">exp(x)</span></td></tr>
-          <tr><td>e^(x²)</td><td><span class="guide-arrow">→</span> <span class="guide-code">exp(x**2)</span></td></tr>
-          <tr><td>ln(x)  [natural log]</td><td><span class="guide-arrow">→</span> <span class="guide-code">log(x)</span></td></tr>
+          <tr><td>ln(x)</td><td><span class="guide-arrow">→</span> <span class="guide-code">log(x)</span></td></tr>
           <tr><td>log base 10</td><td><span class="guide-arrow">→</span> <span class="guide-code">log(x,10)</span></td></tr>
           <tr><td>sinh x</td><td><span class="guide-arrow">→</span> <span class="guide-code">sinh(x)</span></td></tr>
           <tr><td>cosh x</td><td><span class="guide-arrow">→</span> <span class="guide-code">cosh(x)</span></td></tr>
           <tr><td>tanh x</td><td><span class="guide-arrow">→</span> <span class="guide-code">tanh(x)</span></td></tr>
+          <tr><td>e^(x²)</td><td><span class="guide-arrow">→</span> <span class="guide-code">exp(x**2)</span></td></tr>
         </table>
       </div>
-
       <div class="guide-card guide-card-adv">
         <h4>🌟 Special Values &amp; Tips</h4>
         <table class="guide-table">
@@ -1688,7 +1719,6 @@ if st.session_state.operation is None:
           <tr><td>ln(sin x)</td><td><span class="guide-arrow">→</span> <span class="guide-code">log(sin(x))</span></td></tr>
         </table>
       </div>
-
     </div>
     """, unsafe_allow_html=True)
 
