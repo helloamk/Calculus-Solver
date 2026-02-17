@@ -13,53 +13,20 @@ import numpy as np
 st.set_page_config(page_title="Advanced Calculus Solver - MathWithAmrit",
                    page_icon="📐", layout="wide",
                    initial_sidebar_state="collapsed")
+
 hide_branding = """
     <style>
-        /* ── Hide all Streamlit UI chrome including GitHub account ── */
-
-        /* Top-right toolbar (contains GitHub account avatar) */
-        [data-testid="stToolbar"]                        { visibility: hidden !important; display: none !important; }
-
-        /* Header bar */
-        header                                           { visibility: hidden !important; display: none !important; }
-
-        /* Footer / "Made with Streamlit" */
-        footer                                           { visibility: hidden !important; display: none !important; }
-
-        /* Main menu hamburger */
-        #MainMenu                                        { visibility: hidden !important; display: none !important; }
-
-        /* Deploy button */
-        [data-testid="stDeployButton"]                   { display: none !important; }
-        .stDeployButton                                  { display: none !important; }
-
-        /* Status widget (spinner area) */
-        [data-testid="stStatusWidget"]                   { visibility: hidden !important; display: none !important; }
-
-        /* Decoration bar at top */
-        [data-testid="stDecoration"]                     { display: none !important; }
-
-        /* Bottom-right profile / GitHub account container — current Streamlit versions */
-        [data-testid="stBottom"]                         { display: none !important; }
-        [data-testid="stBottomBlockContainer"]           { display: none !important; }
-
-        /* Profile container class names (covers multiple Streamlit versions) */
-        ._profileContainer_gzau3_53                      { display: none !important; }
-        ._container_gzau3_1                              { display: none !important; }
-        ._profilePreview_gzau3_63                        { display: none !important; }
-
-        /* Emotion-cache class names used by Streamlit for the account badge */
-        .st-emotion-cache-ue6hpy                         { display: none !important; }
-        .st-emotion-cache-1v0mbdj                        { display: none !important; }
-        .st-emotion-cache-zq5wmm                         { display: none !important; }
-        .st-emotion-cache-czz5lk                         { display: none !important; }
-        .st-emotion-cache-1wbqy5l                        { display: none !important; }
-
-        /* Nuclear fallback — any fixed-position bottom-right element Streamlit injects */
-        div[class*="ProfileContainer"]                   { display: none !important; }
-        div[class*="profileContainer"]                   { display: none !important; }
-        section[data-testid="stFooter"]                  { display: none !important; }
-        .reportview-container .main footer               { display: none !important; }
+        #MainMenu                          { display: none !important; }
+        header                             { display: none !important; }
+        footer                             { display: none !important; }
+        [data-testid="stToolbar"]          { display: none !important; }
+        [data-testid="stDecoration"]       { display: none !important; }
+        [data-testid="stStatusWidget"]     { display: none !important; }
+        [data-testid="stDeployButton"]     { display: none !important; }
+        [data-testid="stBottom"]           { display: none !important; }
+        /* This targets the profile picture badge specifically */
+        [data-testid="stBottom"] > div     { display: none !important; }
+        iframe[title="streamlit_community_cloud.streamlit_app"]  { display: none !important; }
     </style>
 """
 st.markdown(hide_branding, unsafe_allow_html=True) 
@@ -1921,5 +1888,6 @@ st.markdown("""
     Built for mathematics learners · 
 
 </div>""", unsafe_allow_html=True)
+
 
 
