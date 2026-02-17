@@ -1596,139 +1596,6 @@ if st.session_state.operation is None:
             st.session_state.operation = "Triple Integral"; st.rerun()
         _end()
 
-# ── Syntax Guide ──────────────────────────────────────────────────────────
-st.markdown("<br>", unsafe_allow_html=True)
-st.markdown("""
-<div class="section-heading">
-    <h2>📖 How to Type Functions</h2>
-    <p>Use the syntax below when entering your function</p>
-</div>""", unsafe_allow_html=True)
-
-st.markdown("""
-<style>
-.guide-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1rem;
-    margin-bottom: 2rem;
-}
-.guide-card {
-    background: var(--surface);
-    border: 1.5px solid var(--border);
-    border-radius: 16px;
-    padding: 1.2rem 1.5rem;
-    position: relative;
-    overflow: hidden;
-}
-.guide-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 3px;
-    background: linear-gradient(90deg, var(--gc), transparent);
-}
-.guide-card-basic  { --gc: #4f8ef7; }
-.guide-card-trig   { --gc: #a78bfa; }
-.guide-card-exp    { --gc: #34d399; }
-.guide-card-adv    { --gc: #fb923c; }
-.guide-card h4 {
-    font-size: 0.8rem;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--gc);
-    margin: 0 0 0.8rem;
-}
-.guide-table { width: 100%; border-collapse: collapse; }
-.guide-table tr { border-bottom: 1px solid var(--border); }
-.guide-table tr:last-child { border-bottom: none; }
-.guide-table td {
-    padding: 0.45rem 0.3rem;
-    font-size: 0.83rem;
-    color: var(--text-body);
-    vertical-align: middle;
-}
-.guide-table td:first-child {
-    color: var(--text-muted);
-    width: 42%;
-    font-size: 0.8rem;
-}
-.guide-code {
-    font-family: 'JetBrains Mono', monospace;
-    background: color-mix(in srgb, var(--gc) 12%, transparent);
-    color: var(--gc);
-    border: 1px solid color-mix(in srgb, var(--gc) 25%, transparent);
-    padding: 0.15rem 0.5rem;
-    border-radius: 6px;
-    font-size: 0.82rem;
-    font-weight: 600;
-}
-.guide-arrow {
-    color: var(--text-muted);
-    font-size: 0.75rem;
-    padding: 0 0.3rem;
-}
-@media(max-width:768px){
-    .guide-grid { grid-template-columns: 1fr; }
-}
-</style>
-
-<div class="guide-grid">
-
-  <div class="guide-card guide-card-basic">
-    <h4>⚡ Basic Operations</h4>
-    <table class="guide-table">
-      <tr><td>x squared</td><td><span class="guide-arrow">→</span> <span class="guide-code">x**2</span></td></tr>
-      <tr><td>x cubed</td><td><span class="guide-arrow">→</span> <span class="guide-code">x**3</span></td></tr>
-      <tr><td>x to the n</td><td><span class="guide-arrow">→</span> <span class="guide-code">x**n</span></td></tr>
-      <tr><td>x times y</td><td><span class="guide-arrow">→</span> <span class="guide-code">x*y</span></td></tr>
-      <tr><td>x divided by y</td><td><span class="guide-arrow">→</span> <span class="guide-code">x/y</span></td></tr>
-      <tr><td>square root of x</td><td><span class="guide-arrow">→</span> <span class="guide-code">sqrt(x)</span></td></tr>
-      <tr><td>1 over x²+1</td><td><span class="guide-arrow">→</span> <span class="guide-code">1/(x**2+1)</span></td></tr>
-    </table>
-  </div>
-
-  <div class="guide-card guide-card-trig">
-    <h4>📐 Trig & Inverse Trig</h4>
-    <table class="guide-table">
-      <tr><td>sin x</td><td><span class="guide-arrow">→</span> <span class="guide-code">sin(x)</span></td></tr>
-      <tr><td>cos x</td><td><span class="guide-arrow">→</span> <span class="guide-code">cos(x)</span></td></tr>
-      <tr><td>tan x</td><td><span class="guide-arrow">→</span> <span class="guide-code">tan(x)</span></td></tr>
-      <tr><td>arcsin x</td><td><span class="guide-arrow">→</span> <span class="guide-code">asin(x)</span></td></tr>
-      <tr><td>arccos x</td><td><span class="guide-arrow">→</span> <span class="guide-code">acos(x)</span></td></tr>
-      <tr><td>arctan x</td><td><span class="guide-arrow">→</span> <span class="guide-code">atan(x)</span></td></tr>
-      <tr><td>sin²x</td><td><span class="guide-arrow">→</span> <span class="guide-code">sin(x)**2</span></td></tr>
-    </table>
-  </div>
-
-  <div class="guide-card guide-card-exp">
-    <h4>🔢 Exponential & Log</h4>
-    <table class="guide-table">
-      <tr><td>eˣ</td><td><span class="guide-arrow">→</span> <span class="guide-code">exp(x)</span></td></tr>
-      <tr><td>e^(x²)</td><td><span class="guide-arrow">→</span> <span class="guide-code">exp(x**2)</span></td></tr>
-      <tr><td>ln(x)</td><td><span class="guide-arrow">→</span> <span class="guide-code">log(x)</span></td></tr>
-      <tr><td>log base 10</td><td><span class="guide-arrow">→</span> <span class="guide-code">log(x,10)</span></td></tr>
-      <tr><td>sinh x</td><td><span class="guide-arrow">→</span> <span class="guide-code">sinh(x)</span></td></tr>
-      <tr><td>cosh x</td><td><span class="guide-arrow">→</span> <span class="guide-code">cosh(x)</span></td></tr>
-      <tr><td>tanh x</td><td><span class="guide-arrow">→</span> <span class="guide-code">tanh(x)</span></td></tr>
-    </table>
-  </div>
-
-  <div class="guide-card guide-card-adv">
-    <h4>🌟 Special Values & Tips</h4>
-    <table class="guide-table">
-      <tr><td>infinity (∞)</td><td><span class="guide-arrow">→</span> <span class="guide-code">oo</span></td></tr>
-      <tr><td>pi (π)</td><td><span class="guide-arrow">→</span> <span class="guide-code">pi</span></td></tr>
-      <tr><td>Euler's e</td><td><span class="guide-arrow">→</span> <span class="guide-code">E</span></td></tr>
-      <tr><td>absolute value</td><td><span class="guide-arrow">→</span> <span class="guide-code">Abs(x)</span></td></tr>
-      <tr><td>x·sin(x²)</td><td><span class="guide-arrow">→</span> <span class="guide-code">x*sin(x**2)</span></td></tr>
-      <tr><td>ln(sin x)</td><td><span class="guide-arrow">→</span> <span class="guide-code">log(sin(x))</span></td></tr>
-      <tr><td>negative infinity</td><td><span class="guide-arrow">→</span> <span class="guide-code">-oo</span></td></tr>
-    </table>
-  </div>
-
-</div>
-""", unsafe_allow_html=True)
 
 else:
     operation = st.session_state.operation
@@ -2012,6 +1879,140 @@ else:
             except Exception as e:
                 st.error(f"❌ Error: {e}")
                 st.info("💡 Syntax: `log(x)` for ln · `oo` for ∞ · `**2` for squared")
+
+# ── Syntax Guide ──────────────────────────────────────────────────────────
+st.markdown("<br>", unsafe_allow_html=True)
+st.markdown("""
+<div class="section-heading">
+    <h2>📖 How to Type Functions</h2>
+    <p>Use the syntax below when entering your function</p>
+</div>""", unsafe_allow_html=True)
+
+st.markdown("""
+<style>
+.guide-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+.guide-card {
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: 16px;
+    padding: 1.2rem 1.5rem;
+    position: relative;
+    overflow: hidden;
+}
+.guide-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--gc), transparent);
+}
+.guide-card-basic  { --gc: #4f8ef7; }
+.guide-card-trig   { --gc: #a78bfa; }
+.guide-card-exp    { --gc: #34d399; }
+.guide-card-adv    { --gc: #fb923c; }
+.guide-card h4 {
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gc);
+    margin: 0 0 0.8rem;
+}
+.guide-table { width: 100%; border-collapse: collapse; }
+.guide-table tr { border-bottom: 1px solid var(--border); }
+.guide-table tr:last-child { border-bottom: none; }
+.guide-table td {
+    padding: 0.45rem 0.3rem;
+    font-size: 0.83rem;
+    color: var(--text-body);
+    vertical-align: middle;
+}
+.guide-table td:first-child {
+    color: var(--text-muted);
+    width: 42%;
+    font-size: 0.8rem;
+}
+.guide-code {
+    font-family: 'JetBrains Mono', monospace;
+    background: color-mix(in srgb, var(--gc) 12%, transparent);
+    color: var(--gc);
+    border: 1px solid color-mix(in srgb, var(--gc) 25%, transparent);
+    padding: 0.15rem 0.5rem;
+    border-radius: 6px;
+    font-size: 0.82rem;
+    font-weight: 600;
+}
+.guide-arrow {
+    color: var(--text-muted);
+    font-size: 0.75rem;
+    padding: 0 0.3rem;
+}
+@media(max-width:768px){
+    .guide-grid { grid-template-columns: 1fr; }
+}
+</style>
+
+<div class="guide-grid">
+
+  <div class="guide-card guide-card-basic">
+    <h4>⚡ Basic Operations</h4>
+    <table class="guide-table">
+      <tr><td>x squared</td><td><span class="guide-arrow">→</span> <span class="guide-code">x**2</span></td></tr>
+      <tr><td>x cubed</td><td><span class="guide-arrow">→</span> <span class="guide-code">x**3</span></td></tr>
+      <tr><td>x to the n</td><td><span class="guide-arrow">→</span> <span class="guide-code">x**n</span></td></tr>
+      <tr><td>x times y</td><td><span class="guide-arrow">→</span> <span class="guide-code">x*y</span></td></tr>
+      <tr><td>x divided by y</td><td><span class="guide-arrow">→</span> <span class="guide-code">x/y</span></td></tr>
+      <tr><td>square root of x</td><td><span class="guide-arrow">→</span> <span class="guide-code">sqrt(x)</span></td></tr>
+      <tr><td>1 over x²+1</td><td><span class="guide-arrow">→</span> <span class="guide-code">1/(x**2+1)</span></td></tr>
+    </table>
+  </div>
+
+  <div class="guide-card guide-card-trig">
+    <h4>📐 Trig & Inverse Trig</h4>
+    <table class="guide-table">
+      <tr><td>sin x</td><td><span class="guide-arrow">→</span> <span class="guide-code">sin(x)</span></td></tr>
+      <tr><td>cos x</td><td><span class="guide-arrow">→</span> <span class="guide-code">cos(x)</span></td></tr>
+      <tr><td>tan x</td><td><span class="guide-arrow">→</span> <span class="guide-code">tan(x)</span></td></tr>
+      <tr><td>arcsin x</td><td><span class="guide-arrow">→</span> <span class="guide-code">asin(x)</span></td></tr>
+      <tr><td>arccos x</td><td><span class="guide-arrow">→</span> <span class="guide-code">acos(x)</span></td></tr>
+      <tr><td>arctan x</td><td><span class="guide-arrow">→</span> <span class="guide-code">atan(x)</span></td></tr>
+      <tr><td>sin²x</td><td><span class="guide-arrow">→</span> <span class="guide-code">sin(x)**2</span></td></tr>
+    </table>
+  </div>
+
+  <div class="guide-card guide-card-exp">
+    <h4>🔢 Exponential & Log</h4>
+    <table class="guide-table">
+      <tr><td>eˣ</td><td><span class="guide-arrow">→</span> <span class="guide-code">exp(x)</span></td></tr>
+      <tr><td>e^(x²)</td><td><span class="guide-arrow">→</span> <span class="guide-code">exp(x**2)</span></td></tr>
+      <tr><td>ln(x)</td><td><span class="guide-arrow">→</span> <span class="guide-code">log(x)</span></td></tr>
+      <tr><td>log base 10</td><td><span class="guide-arrow">→</span> <span class="guide-code">log(x,10)</span></td></tr>
+      <tr><td>sinh x</td><td><span class="guide-arrow">→</span> <span class="guide-code">sinh(x)</span></td></tr>
+      <tr><td>cosh x</td><td><span class="guide-arrow">→</span> <span class="guide-code">cosh(x)</span></td></tr>
+      <tr><td>tanh x</td><td><span class="guide-arrow">→</span> <span class="guide-code">tanh(x)</span></td></tr>
+    </table>
+  </div>
+
+  <div class="guide-card guide-card-adv">
+    <h4>🌟 Special Values & Tips</h4>
+    <table class="guide-table">
+      <tr><td>infinity (∞)</td><td><span class="guide-arrow">→</span> <span class="guide-code">oo</span></td></tr>
+      <tr><td>pi (π)</td><td><span class="guide-arrow">→</span> <span class="guide-code">pi</span></td></tr>
+      <tr><td>Euler's e</td><td><span class="guide-arrow">→</span> <span class="guide-code">E</span></td></tr>
+      <tr><td>absolute value</td><td><span class="guide-arrow">→</span> <span class="guide-code">Abs(x)</span></td></tr>
+      <tr><td>x·sin(x²)</td><td><span class="guide-arrow">→</span> <span class="guide-code">x*sin(x**2)</span></td></tr>
+      <tr><td>ln(sin x)</td><td><span class="guide-arrow">→</span> <span class="guide-code">log(sin(x))</span></td></tr>
+      <tr><td>negative infinity</td><td><span class="guide-arrow">→</span> <span class="guide-code">-oo</span></td></tr>
+    </table>
+  </div>
+
+</div>
+""", unsafe_allow_html=True)
 
 st.markdown("---")
 st.markdown("""
