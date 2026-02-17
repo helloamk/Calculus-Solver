@@ -132,32 +132,32 @@ hr{border-color:var(--border)!important;margin:1.5rem 0!important;}
 </style>
 """, unsafe_allow_html=True)
 
-# ── Hide GitHub fork/Octocat icon + Streamlit footer & cloud badge ───────────────
-hide_streamlit_and_github = """
+hide_branding = """
     <style>
-        /* Hide GitHub fork/Octocat icon (top-right) */
-        #MainMenu {visibility: hidden !important;}
-        header > .stApp > div:first-child {visibility: hidden !important;}
-        [data-testid="stDecoration"] {visibility: hidden !important;}
+        /* GitHub fork / Octocat icon (top-right toolbar) */
+        [data-testid="stToolbar"] { visibility: hidden !important; }
+        header .stApp > div:first-child { visibility: hidden !important; }
         
-        /* Hide classic "Made with Streamlit" footer */
-        footer {visibility: hidden !important;}
+        /* Any leftover classic footer (usually already gone) */
+        footer { visibility: hidden !important; }
+        .reportview-container .main footer { display: none !important; }
         
-        /* Hide Streamlit Community Cloud badge / crown / hosted text (bottom-right) */
-        section[data-testid="stFooter"] {display: none !important;}
-        div.element-container[data-testid="stDecoration"] {display: none !important;}
-        .stApp > footer,
-        [data-testid="stAppViewContainer"] > footer,
+        /* Attempt to target old decoration/badge containers (may partially help) */
+        [data-testid="stDecoration"] { display: none !important; }
+        section[data-testid="stFooter"] { display: none !important; }
+        
+        /* Aggressive fallback for renamed classes (sometimes works partially) */
+        .st-emotion-cache-ue6hpy,
+        .st-emotion-cache-1v0mbdj,
         [kind="footer"],
-        [data-testid="stToolbar"] {display: none !important;}
-        
-        /* Extra safety selectors (sometimes needed after updates) */
-        .reportview-container .main footer {display: none !important;}
-        .st-emotion-cache-1yiq2ps {display: none !important;}
+        [data-testid*="decoration"],
+        .stApp > footer {
+            display: none !important;
+        }
     </style>
 """
 
-st.markdown(hide_streamlit_and_github, unsafe_allow_html=True)
+st.markdown(hide_branding, unsafe_allow_html=True)
 # ╔══════════════════════════════════════════════════════════════════════════╗
 # ║  SVG INTEGRAL SYMBOLS — pixel-perfect, color-parameterised              ║
 # ╚══════════════════════════════════════════════════════════════════════════╝
