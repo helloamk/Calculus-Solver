@@ -13,6 +13,32 @@ import numpy as np
 st.set_page_config(page_title="Advanced Calculus Solver - MathWithAmrit",
                    page_icon="📐", layout="wide",
                    initial_sidebar_state="collapsed")
+hide_branding = """
+    <style>
+        /* GitHub fork / Octocat icon (top-right toolbar) */
+        [data-testid="stToolbar"] { visibility: hidden !important; }
+        header .stApp > div:first-child { visibility: hidden !important; }
+        
+        /* Any leftover classic footer (usually already gone) */
+        footer { visibility: hidden !important; }
+        .reportview-container .main footer { display: none !important; }
+        
+        /* Attempt to target old decoration/badge containers (may partially help) */
+        [data-testid="stDecoration"] { display: none !important; }
+        section[data-testid="stFooter"] { display: none !important; }
+        
+        /* Aggressive fallback for renamed classes (sometimes works partially) */
+        .st-emotion-cache-ue6hpy,
+        .st-emotion-cache-1v0mbdj,
+        [kind="footer"],
+        [data-testid*="decoration"],
+        .stApp > footer {
+            display: none !important;
+        }
+    </style>
+"""
+
+st.markdown(hide_branding, unsafe_allow_html=True)
 
 for k, v in [('operation', None), ('show_formula', False), ('show_graph', False),
              ('der_solved', False), ('der_inputs', None),
@@ -132,32 +158,6 @@ hr{border-color:var(--border)!important;margin:1.5rem 0!important;}
 </style>
 """, unsafe_allow_html=True)
 
-hide_branding = """
-    <style>
-        /* GitHub fork / Octocat icon (top-right toolbar) */
-        [data-testid="stToolbar"] { visibility: hidden !important; }
-        header .stApp > div:first-child { visibility: hidden !important; }
-        
-        /* Any leftover classic footer (usually already gone) */
-        footer { visibility: hidden !important; }
-        .reportview-container .main footer { display: none !important; }
-        
-        /* Attempt to target old decoration/badge containers (may partially help) */
-        [data-testid="stDecoration"] { display: none !important; }
-        section[data-testid="stFooter"] { display: none !important; }
-        
-        /* Aggressive fallback for renamed classes (sometimes works partially) */
-        .st-emotion-cache-ue6hpy,
-        .st-emotion-cache-1v0mbdj,
-        [kind="footer"],
-        [data-testid*="decoration"],
-        .stApp > footer {
-            display: none !important;
-        }
-    </style>
-"""
-
-st.markdown(hide_branding, unsafe_allow_html=True)
 # ╔══════════════════════════════════════════════════════════════════════════╗
 # ║  SVG INTEGRAL SYMBOLS — pixel-perfect, color-parameterised              ║
 # ╚══════════════════════════════════════════════════════════════════════════╝
@@ -1897,3 +1897,4 @@ st.markdown("""
     Built for mathematics learners · 
 
 </div>""", unsafe_allow_html=True)
+
