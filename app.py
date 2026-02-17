@@ -15,30 +15,54 @@ st.set_page_config(page_title="Advanced Calculus Solver - MathWithAmrit",
                    initial_sidebar_state="collapsed")
 hide_branding = """
     <style>
-        /* GitHub fork / Octocat icon (top-right toolbar) */
-        [data-testid="stToolbar"] { visibility: hidden !important; }
-        header .stApp > div:first-child { visibility: hidden !important; }
-        
-        /* Any leftover classic footer (usually already gone) */
-        footer { visibility: hidden !important; }
-        .reportview-container .main footer { display: none !important; }
-        
-        /* Attempt to target old decoration/badge containers (may partially help) */
-        [data-testid="stDecoration"] { display: none !important; }
-        section[data-testid="stFooter"] { display: none !important; }
-        
-        /* Aggressive fallback for renamed classes (sometimes works partially) */
-        .st-emotion-cache-ue6hpy,
-        .st-emotion-cache-1v0mbdj,
-        [kind="footer"],
-        [data-testid*="decoration"],
-        .stApp > footer {
-            display: none !important;
-        }
+        /* ── Hide all Streamlit UI chrome including GitHub account ── */
+
+        /* Top-right toolbar (contains GitHub account avatar) */
+        [data-testid="stToolbar"]                        { visibility: hidden !important; display: none !important; }
+
+        /* Header bar */
+        header                                           { visibility: hidden !important; display: none !important; }
+
+        /* Footer / "Made with Streamlit" */
+        footer                                           { visibility: hidden !important; display: none !important; }
+
+        /* Main menu hamburger */
+        #MainMenu                                        { visibility: hidden !important; display: none !important; }
+
+        /* Deploy button */
+        [data-testid="stDeployButton"]                   { display: none !important; }
+        .stDeployButton                                  { display: none !important; }
+
+        /* Status widget (spinner area) */
+        [data-testid="stStatusWidget"]                   { visibility: hidden !important; display: none !important; }
+
+        /* Decoration bar at top */
+        [data-testid="stDecoration"]                     { display: none !important; }
+
+        /* Bottom-right profile / GitHub account container — current Streamlit versions */
+        [data-testid="stBottom"]                         { display: none !important; }
+        [data-testid="stBottomBlockContainer"]           { display: none !important; }
+
+        /* Profile container class names (covers multiple Streamlit versions) */
+        ._profileContainer_gzau3_53                      { display: none !important; }
+        ._container_gzau3_1                              { display: none !important; }
+        ._profilePreview_gzau3_63                        { display: none !important; }
+
+        /* Emotion-cache class names used by Streamlit for the account badge */
+        .st-emotion-cache-ue6hpy                         { display: none !important; }
+        .st-emotion-cache-1v0mbdj                        { display: none !important; }
+        .st-emotion-cache-zq5wmm                         { display: none !important; }
+        .st-emotion-cache-czz5lk                         { display: none !important; }
+        .st-emotion-cache-1wbqy5l                        { display: none !important; }
+
+        /* Nuclear fallback — any fixed-position bottom-right element Streamlit injects */
+        div[class*="ProfileContainer"]                   { display: none !important; }
+        div[class*="profileContainer"]                   { display: none !important; }
+        section[data-testid="stFooter"]                  { display: none !important; }
+        .reportview-container .main footer               { display: none !important; }
     </style>
 """
-
-st.markdown(hide_branding, unsafe_allow_html=True)
+st.markdown(hide_branding, unsafe_allow_html=True) 
 
 for k, v in [('operation', None), ('show_formula', False), ('show_graph', False),
              ('der_solved', False), ('der_inputs', None),
@@ -1897,4 +1921,5 @@ st.markdown("""
     Built for mathematics learners · 
 
 </div>""", unsafe_allow_html=True)
+
 
