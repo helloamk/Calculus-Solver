@@ -132,7 +132,32 @@ hr{border-color:var(--border)!important;margin:1.5rem 0!important;}
 </style>
 """, unsafe_allow_html=True)
 
+# ── Hide GitHub fork/Octocat icon + Streamlit footer & cloud badge ───────────────
+hide_streamlit_and_github = """
+    <style>
+        /* Hide GitHub fork/Octocat icon (top-right) */
+        #MainMenu {visibility: hidden !important;}
+        header > .stApp > div:first-child {visibility: hidden !important;}
+        [data-testid="stDecoration"] {visibility: hidden !important;}
+        
+        /* Hide classic "Made with Streamlit" footer */
+        footer {visibility: hidden !important;}
+        
+        /* Hide Streamlit Community Cloud badge / crown / hosted text (bottom-right) */
+        section[data-testid="stFooter"] {display: none !important;}
+        div.element-container[data-testid="stDecoration"] {display: none !important;}
+        .stApp > footer,
+        [data-testid="stAppViewContainer"] > footer,
+        [kind="footer"],
+        [data-testid="stToolbar"] {display: none !important;}
+        
+        /* Extra safety selectors (sometimes needed after updates) */
+        .reportview-container .main footer {display: none !important;}
+        .st-emotion-cache-1yiq2ps {display: none !important;}
+    </style>
+"""
 
+st.markdown(hide_streamlit_and_github, unsafe_allow_html=True)
 # ╔══════════════════════════════════════════════════════════════════════════╗
 # ║  SVG INTEGRAL SYMBOLS — pixel-perfect, color-parameterised              ║
 # ╚══════════════════════════════════════════════════════════════════════════╝
@@ -1870,4 +1895,5 @@ st.markdown("""
 <div class="footer-wrap">
     <strong>MathWithAmrit</strong> ·Calculus Solver ·<br>
     Built for mathematics learners · 
+
 </div>""", unsafe_allow_html=True)
