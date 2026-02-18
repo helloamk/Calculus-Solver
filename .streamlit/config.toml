@@ -1,8 +1,25 @@
-[client]
-toolbarMode = "minimal"
+[theme]
+base = "dark"
+primaryColor = "#4f8ef7"
+backgroundColor = "#0b0f1a"
+secondaryBackgroundColor = "#111827"
+textColor = "#94a3b8"
+font = "sans serif"
 
 [server]
-runOnSave = false
+headless = true
+enableCORS = false
+enableXsrfProtection = false
+maxUploadSize = 5
 
 [browser]
 gatherUsageStats = false
+serverAddress = "localhost"
+
+[runner]
+fastReruns = true
+enforceSerializableSessionState = false
+
+[client]
+showErrorDetails = false
+toolbarMode = "minimal"
